@@ -1,6 +1,6 @@
 const createImageFileName = (path:string):string => {
 
-    const strToAddToImageFileName = 'thumbs.';
+    const strToAddToImageFileName = '_thumbs.';
 
     let fileNameArr = path.split('.');
 

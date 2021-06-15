@@ -1,10 +1,15 @@
-class ImageApiError extends Error {
+import express, { Request, Response } from "express";
 
-    constructor(message: string, status: number) {
-        super();
-        this.message = message;
-        // --this.statusCode = status;
-    }
-}
+const errorApi = express();
 
-export default ImageApiError;
+errorApi.use( (err: Error, req: Request, res: Response, next: Function) => {
+    console.error(err);
+    next(err);
+});
+
+errorApi.use( (err: Error, req: Request, res: Response, next: Function) => {
+    res.status(500);
+    res.send('Internal Server Error');
+});
+
+export default errorApi;
