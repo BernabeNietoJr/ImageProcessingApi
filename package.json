@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@types/sharp": "^0.28.3",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "jasmine": "^3.6.4",
     "jasmine-spec-reporter": "^6.0.0",

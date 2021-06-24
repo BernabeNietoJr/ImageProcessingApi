@@ -8,8 +8,7 @@ errorApi.use( (err: Error, req: Request, res: Response, next: Function) => {
 });
 
 errorApi.use( (err: Error, req: Request, res: Response, next: Function) => {
-    res.status(500);
-    res.send('Internal Server Error');
+    res.status(500).send('Internal Server Error');
 });
 
 export default errorApi;

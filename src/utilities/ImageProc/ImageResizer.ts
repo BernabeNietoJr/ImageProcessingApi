@@ -1,22 +1,20 @@
 import sharp from 'sharp';
-import createImageFileName from '../StrHelper/fileNameCreator';
 import path from 'path';
 
-const outFolder =  './thumbs/'
-const thumbStr = '_thumbs';
+const outFolder =  './public/thumbs/'
+//const thumbStr = '_thumbs';
 
 const ResizeImage =  async (inputImg: string, width:number, height:number) => { 
     try {
         let fileObj = path.parse(inputImg);
-        let imgFName = fileObj.name + thumbStr + fileObj.ext;
-
-        let fname = createImageFileName(inputImg)
+        let widthStr = + width.toString(10);
+        let heightStr = 'X' + height.toString(10);
+        let imgFName = outFolder + fileObj.name + widthStr + heightStr + fileObj.ext;
 
         await sharp(inputImg)
                 .resize(width, height)
                 .jpeg()
-                .toFile(outFolder + imgFName)
-                .then()
+                .toFile(imgFName)
     } catch (err){
         console.log(err);
     }

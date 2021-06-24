@@ -1,10 +1,10 @@
-const createImageFileName = (path:string):string => {
+const createImageFileName = (path:string, width: string, height: string):string => {
 
-    const strToAddToImageFileName = '_thumbs.';
+    const byStr = 'X';
 
     let fileNameArr = path.split('.');
 
-    return fileNameArr[0] + strToAddToImageFileName + fileNameArr[1];
+    return fileNameArr[0]  + width + byStr + height + '.' + fileNameArr[1];
 
 };
 

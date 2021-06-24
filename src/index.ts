@@ -8,20 +8,19 @@ import path from 'path';
 const app = express();
 const port = 3000;
 
-//const inputFile = path.resolve('./full', 'santamonica.jpg');
-const  inputFile = './full/' + 'santamonica.jpg';
 
-//app.use(express.urlencoded({extended:true}));
+app.use(express.static('public'));
 
-// app.get('/convert',  (req,res, next) => {
-//   ResizeImage(inputFile, 300, 450);
-//   res.send('convert been accessed!');
-//   next();
-// });
+app.set('views', './public/thumbs');
+app.set('view engine', 'ejs');
+
+
 
 app.use('/api/images', imageRouter);
 
+
 app.use('/', errorApi);
+
 
 // start the Express server
 app.listen(port, () => {
@@ -33,11 +32,11 @@ app.listen(port, () => {
 //   res.send('/dos/files folder');
 // });
 
-// app.get('/fath' ,(req, res) => {
-//   //res.send(path.parse(path.resolve('./full', 'dos.jpg')))
-//   res.send(inputFile)
-// });
-
+app.get('/fath' ,(req, res) => {
+  let jpgFile = '/thumbs/palmtunnel400X300.jpg';
+  console.log(jpgFile);
+  res.render('image', { jpgFile: jpgFile });
+});
 
 
 

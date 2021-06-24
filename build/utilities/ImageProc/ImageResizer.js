@@ -40,17 +40,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var sharp_1 = __importDefault(require("sharp"));
+var path_1 = __importDefault(require("path"));
+var outFolder = './public/thumbs/';
+//const thumbStr = '_thumbs';
 var ResizeImage = function (inputImg, width, height) { return __awaiter(void 0, void 0, void 0, function () {
-    var err_1;
+    var fileObj, widthStr, heightStr, imgFName, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
+                fileObj = path_1.default.parse(inputImg);
+                widthStr = +width.toString(10);
+                heightStr = 'X' + height.toString(10);
+                imgFName = outFolder + fileObj.name + widthStr + heightStr + fileObj.ext;
                 return [4 /*yield*/, sharp_1.default(inputImg)
                         .resize(width, height)
                         .jpeg()
-                        .toFile('./thumbs/output.jpeg')
-                        .then()];
+                        .toFile(imgFName)];
             case 1:
                 _a.sent();
                 return [3 /*break*/, 3];
