@@ -4,47 +4,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
+//import isFileExist from './utilities/StrHelper/fileVerifier';
+//import ResizeImage from './utilities/ImageProc/ImageResizer';
 var imageRoute_1 = __importDefault(require("./utilities/Router/imageRoute"));
 var ImageError_1 = __importDefault(require("./utilities/ErrorHandling/ImageError"));
+//import path from 'path';
+//import fs from 'fs';
+//import { constants } from 'buffer';
 var app = express_1.default();
 var port = 3000;
-app.use(express_1.default.static('public'));
-app.set('views', './public/thumbs');
-app.set('view engine', 'ejs');
-//app.use(express.static(path.join(__dirname,'/thumbs')));
-//app.set('views', path.join(__dirname, '/thumbs/'));
-//let imgDir = path.resolve('/thumbs');
-//const  inputFile = './/' + 'santamonica.jpg';
-//app.use(express.urlencoded({extended:true}));
-// app.get('/convert',  (req,res, next) => {
-//   ResizeImage(inputFile, 300, 450);
-//   res.send('convert been accessed!');
-//   next();
-// });
 app.use('/api/images', imageRoute_1.default);
-app.get('/img', function (req, res, next) {
-    res.send("HI!!!");
-    //next;
-});
-//app.get()
-// app.get('/img' ,(req, res) => {
-//   let imgDir = '/icelandwaterfall_thumbs.jpg';
-//   //console.log( ' GET /dog.txt');
-//   //res.render('/dos.txt');
-//   res.render('image.ejs', { imgDir : imgDir });
-//   // console.log(__dirname);
-//   // console.log(path.join(__dirname, './thumbs', 'fjord_thumbs.jpg'));
-// })
 app.use('/', ImageError_1.default);
 // start the Express server
 app.listen(port, function () {
     console.log("server started at http://localhost:" + port);
 });
-// app.get('/dos/files', (req,res) => {
+// app.get('/sos', (req,res) => {
 //   //let val = isFileExist(inputFile);
-//   res.send('/dos/files folder');
+//   //res.sendFile('/thumbs/fjord.jpg');
+//   //console.log(process.cwd());
 // });
-// app.get('/fath' ,(req, res) => {
-//   //res.send(path.parse(path.resolve('./full', 'dos.jpg')))
-//   res.send(inputFile)
+//app.get('/fath' ,(req, res) => {
+//   let jpgFile = 'fjord400X400.jpg';
+//   //let jpgFile = 'icelandwaterfall100X100.jpg';
+//   //console.log(jpgFile);
+//   //console.log(outputPath);
+//   //res.render('image', { jpgFile: jpgFile });
+//   //res.sendFile(outputPath + jpgFile);
+//   try {
+//     fs.access(outputPath + jpgFile, fs.constants.F_OK, () => {
+//       console.log(jpgFile + ': Existing');
+//       res.sendFile(outputPath +  jpgFile);
+//     })
+//   } catch(err) {
+//     console.error('not existing');
+//   }
 // });
+exports.default = app;

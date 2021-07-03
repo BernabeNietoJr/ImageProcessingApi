@@ -41,7 +41,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var sharp_1 = __importDefault(require("sharp"));
 var path_1 = __importDefault(require("path"));
-var outFolder = './public/thumbs/';
+var outFolder = './thumbs/';
+//const resizeImageFolder = path.resolve('..','thumbs');
 //const thumbStr = '_thumbs';
 var ResizeImage = function (inputImg, width, height) { return __awaiter(void 0, void 0, void 0, function () {
     var fileObj, widthStr, heightStr, imgFName, err_1;

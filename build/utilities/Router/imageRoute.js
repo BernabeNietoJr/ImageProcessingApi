@@ -7,10 +7,10 @@ var express_1 = __importDefault(require("express"));
 var fs_1 = __importDefault(require("fs"));
 var ImageResizer_1 = __importDefault(require("../ImageProc/ImageResizer"));
 var fileNameCreator_1 = __importDefault(require("../StrHelper/fileNameCreator"));
-var FileChecker_1 = __importDefault(require("../StrHelper/FileChecker"));
+var path_1 = __importDefault(require("path"));
 var router = express_1.default.Router();
 var inputFolder = "./full/";
-var outDir = './public/thumbs/';
+var outDir = './thumbs/';
 router.get('/', function (req, res, next) {
     var _a = req.query, filename = _a.filename, width = _a.width, height = _a.height;
     if (filename === undefined || filename === '' || !fs_1.default.existsSync(inputFolder + filename)) {
@@ -23,19 +23,23 @@ router.get('/', function (req, res, next) {
         res.status(400).send("No define height for " + filename);
     }
     else {
-        var widthInt = Number(width);
-        var heightInt = Number(height);
-        ImageResizer_1.default(inputFolder + filename, widthInt, heightInt);
-        var fname = outDir + fileNameCreator_1.default(filename.toString(), width.toString(), height.toString());
-        if (FileChecker_1.default(fname))
-            console.log(fname + " created");
-        else
-            console.log(fname + " was not created");
-        res.send("<img src=" + fname + " >");
-        //res.render('image', {fname: fname});
-        //res.redirect('/img');
-        console.log(fname);
-        //next();
+        var fname = fileNameCreator_1.default(filename.toString(), width.toString(), height.toString());
+        var jpgFile_1 = outDir + fname;
+        if (fs_1.default.existsSync(jpgFile_1)) {
+            jpgFile_1 = path_1.default.resolve(__dirname, '..', '..', '..', 'thumbs', fname);
+            res.sendFile(jpgFile_1);
+        }
+        else {
+            var widthInt = Number(width);
+            var heightInt = Number(height);
+            ImageResizer_1.default(inputFolder + filename, widthInt, heightInt);
+            jpgFile_1 = path_1.default.resolve(__dirname, '..', '..', '..', 'thumbs', fname);
+            setTimeout(function () {
+                // 100 mill sec delay before serving the resize image 
+                res.sendFile(jpgFile_1);
+            }, 100);
+        }
     }
+    next;
 });
 exports.default = router;

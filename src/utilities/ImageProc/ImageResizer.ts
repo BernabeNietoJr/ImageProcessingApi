@@ -1,7 +1,8 @@
 import sharp from 'sharp';
 import path from 'path';
 
-const outFolder =  './public/thumbs/'
+const outFolder =  './thumbs/';
+//const resizeImageFolder = path.resolve('..','thumbs');
 //const thumbStr = '_thumbs';
 
 const ResizeImage =  async (inputImg: string, width:number, height:number) => { 
@@ -10,7 +11,7 @@ const ResizeImage =  async (inputImg: string, width:number, height:number) => {
         let widthStr = + width.toString(10);
         let heightStr = 'X' + height.toString(10);
         let imgFName = outFolder + fileObj.name + widthStr + heightStr + fileObj.ext;
-
+        
         await sharp(inputImg)
                 .resize(width, height)
                 .jpeg()
