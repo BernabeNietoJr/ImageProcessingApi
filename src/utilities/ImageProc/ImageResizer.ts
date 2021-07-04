@@ -5,7 +5,8 @@ const outFolder =  './thumbs/';
 //const resizeImageFolder = path.resolve('..','thumbs');
 //const thumbStr = '_thumbs';
 
-const ResizeImage =  async (inputImg: string, width:number, height:number) => { 
+const ResizeImage =  async (inputImg: string, width:number, height:number): Promise<void> => { 
+    
     try {
         let fileObj = path.parse(inputImg);
         let widthStr = + width.toString(10);

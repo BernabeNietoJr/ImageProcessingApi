@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import ResizeImage from '../ImageProc/ImageResizer';
 import createImageFileName from '../StrHelper/fileNameCreator';
@@ -10,7 +10,7 @@ const inputFolder = "./full/";
 const outDir = './thumbs/';
 
 
-router.get('/', ( req, res, next) => {
+router.get('/', ( req: Request, res: Response, next: NextFunction )  => {
 
     let { filename, width, height } = req.query;
 
@@ -18,10 +18,10 @@ router.get('/', ( req, res, next) => {
         res.status(404).send(`Image file not found: ${filename}`);
     }
     else if (width === undefined || width === '' ||   isNaN(Number(width))) {
-        res.status(400).send(`No define width for ${filename}`);
+        res.status(400).send(`Invalid width for ${filename}`);
     }
     else if (height === undefined || height === '' || isNaN(Number(height)))  {
-        res.status(400).send(`No define height for ${filename}`);
+        res.status(400).send(`Invalid height for ${filename}`);
     }
     else { 
 

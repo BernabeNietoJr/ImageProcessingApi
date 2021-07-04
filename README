@@ -1,0 +1,10 @@
+To run test/start/build ImageProcessing API type the on the console the following:
+
+To test ImageProcessing API:
+    npm run test
+
+To start ImageProcessing API:
+    npm run start
+
+To build ImageProcessing API:
+    npm run build
