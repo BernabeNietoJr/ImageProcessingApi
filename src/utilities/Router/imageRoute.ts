@@ -17,10 +17,10 @@ router.get('/', ( req: Request, res: Response, next: NextFunction )  => {
     if (filename === undefined || filename === '' || !fs.existsSync(inputFolder + filename)) {
         res.status(404).send(`Image file not found: ${filename}`);
     }
-    else if (width === undefined || width === '' ||   isNaN(Number(width))) {
+    else if (width === undefined || width === '' ||   isNaN(Number(width)) || (Number(width) < 50) ) {
         res.status(400).send(`Invalid width for ${filename}`);
     }
-    else if (height === undefined || height === '' || isNaN(Number(height)))  {
+    else if (height === undefined || height === '' || isNaN(Number(height)) || (Number(height) < 50) )  {
         res.status(400).send(`Invalid height for ${filename}`);
     }
     else { 

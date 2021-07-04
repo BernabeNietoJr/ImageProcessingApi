@@ -8,3 +8,16 @@ To start ImageProcessing API:
 
 To build ImageProcessing API:
     npm run build
+
+
+The Image Resizer and 'api/images?filename=filename.ext&width=number&height=number' work for jpg file 
+and create a resize image with a filename filenamewidthXheight.jpg
+
+e.g. 'api/images?filename=mountain.jpg&width=300&height=300' creates a resize image with 
+filename mountain300X300.jpg
+
+input image file should be located inside full folder in ImageProcessingAPI directory
+resize output image will be created inside thumbs folder in ImageProcessingAPI root directory
+
+api/images endpoint will work only with a minimum of width and height of 50
+below 50 will not work but will the ImageResizer function any width & height will work
