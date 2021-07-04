@@ -8,14 +8,15 @@
       "prettier"
     ],
     "rules": {
-      "prettier/prettier": 2 ,
+      "prettier/prettier": 2,
       "no-use-before-define": ["warn", { "functions": true, "classes": true }],
       "no-var": "off",
       "prefer-const": "off",
       "no-undef": "off"
     },
     "parserOptions": {
-      "ecmaVersion": 2017
+      "ecmaVersion": 2020,
+      "sourceType": "module"
     },
     "env": {
       "node": true,

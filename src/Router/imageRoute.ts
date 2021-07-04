@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
-import ResizeImage from '../ImageProc/ImageResizer';
-import createImageFileName from '../StrHelper/fileNameCreator';
+import ResizeImage from '../utilities/ImageProc/ImageResizer';
+import createImageFileName from '../utilities/StrHelper/fileNameCreator';
 import path from 'path';
 
 const router = express.Router();
@@ -30,7 +30,7 @@ router.get('/', ( req: Request, res: Response, next: NextFunction )  => {
         
         if (fs.existsSync(jpgFile)) {
 
-            jpgFile = path.resolve(__dirname, '..', '..' , '..', 'thumbs', fname);
+            jpgFile = path.resolve(__dirname, '..', '..' , 'thumbs', fname);
             res.sendFile(jpgFile);
             
         }
@@ -40,13 +40,13 @@ router.get('/', ( req: Request, res: Response, next: NextFunction )  => {
             let heightInt = Number(height);
     
             ResizeImage(inputFolder + filename, widthInt, heightInt)
-            
-            jpgFile = path.resolve(__dirname, '..', '..', '..', 'thumbs', fname);
+
+            jpgFile = path.resolve(__dirname, '..', '..', 'thumbs', fname);
             
             setTimeout ( () => { 
-                // 100 mill sec delay before serving the resize image 
+                // 1 sec delay before serving the resize image 
                 res.sendFile(jpgFile);
-            }, 100);
+            }, 1000);
             
         }
             
